@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_announcementCode"
+            android:layout_width="380dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:text="Để xem con bạn trên bản đồ, hãy cài đặt phần mềm trên thiết bị của con và nhập mã này"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="25dp" />
+
+            <TextView
+                android:id="@+id/tv_secretCode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:textSize="40dp"
+                android:textStyle="bold"
+                android:textColor="@color/red"/>
+
+                <TextView
+                android:id="@+id/announcementView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Mã sẽ hết hạn sau 5 phút"
+                android:textAlignment="center"
+                android:textSize="25dp"
+                android:layout_marginTop="20dp"
+                    android:textColor="@color/black"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

@@ -39,6 +39,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        targetName = getIntent().getStringExtra("CHILD_NAME");
     }
 
 
@@ -62,7 +64,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         try {
                             latitude = Double.parseDouble(response.getString("latitude"));;
                             longitude = Double.parseDouble(response.getString("longitude"));
-                            targetName = response.getString("children");
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
