@@ -1,10 +1,7 @@
 package com.example.dinhvi;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.util.Log;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,7 +9,6 @@ import com.github.nkzawa.emitter.Emitter;
 import com.github.nkzawa.socketio.client.IO;
 import com.github.nkzawa.socketio.client.Socket;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -55,15 +51,17 @@ public class ConnectionActivity extends AppCompatActivity {
                         String code = object.getString("connectionString");
                         tvCode.setText(code);
 
+                        /*
                         //-------------- This is for testing, delete when done
                         Handler handler = new Handler();
                         handler.postDelayed(new Runnable() {
                             public void run() {
-                                connectToMap(); //Change to confirmChildScreen() for testing without child-side
+                                confirmChildScreen(); //Change to confirmChildScreen() for testing without child-side
                             }
-                        }, 10000);   //10 seconds
+                        }, 7000);   //x seconds
 
                         //------------------
+                         */
                     }
                     catch (JSONException e) {
                         e.printStackTrace();
@@ -81,7 +79,7 @@ public class ConnectionActivity extends AppCompatActivity {
                 public void run() {
                     JSONObject object = (JSONObject) args[0];
                     mSocket.emit("both connect", "connectionString");
-                    //connectToMap(); //Enable once child-side is completed
+                    confirmChildScreen(); //Enable once child-side is completed
                 }
             });
         }
@@ -89,11 +87,6 @@ public class ConnectionActivity extends AppCompatActivity {
 
     public void confirmChildScreen() {
         Intent intent = new Intent(this, ConfirmChild.class);
-        startActivity(intent);
-    }
-
-    public void connectToMap() {
-        Intent intent = new Intent(this, MapsActivity.class);
         startActivity(intent);
     }
 
