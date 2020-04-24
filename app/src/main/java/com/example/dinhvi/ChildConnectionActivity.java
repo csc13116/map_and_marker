@@ -2,6 +2,8 @@ package com.example.dinhvi;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -21,6 +23,7 @@ public class ChildConnectionActivity extends AppCompatActivity {
     private Socket mSocket;
     EditText connectionCode;
     TextView wrongCodeAnnounce;
+    Button btnChildConnect;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -29,6 +32,7 @@ public class ChildConnectionActivity extends AppCompatActivity {
 
         connectionCode = findViewById(R.id.ed_secretCode);
         wrongCodeAnnounce = findViewById(R.id.tv_announceWrongCode);
+        btnChildConnect = findViewById(R.id.btn_childConnect);
 
         try {
             mSocket = IO.socket("https://socketio-temp.herokuapp.com/connect");
@@ -37,7 +41,13 @@ public class ChildConnectionActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        mSocket.emit("child wait", "connectionString");
+        btnChildConnect.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                String inputCode = connectionCode.getText().toString();
+                mSocket.emit("child wait", inputCode);
+            }
+        });
+
         mSocket.on("found", onFoundConnect);
     }
 
@@ -49,16 +59,8 @@ public class ChildConnectionActivity extends AppCompatActivity {
                 public void run() {
                     JSONObject object = (JSONObject) args[0];
                     try {
-                        String secretCode = object.getString("connectionString");
-                        String inputCode = connectionCode.getText().toString();
-                        if (secretCode == inputCode)
-                        {
-                            onBothPartiesConnect();
-                        }
-                        else
-                        {
-                            wrongCodeAnnounce.setText("Mật mã sai, xin hãy nhập lại mật mã");
-                        }
+                        String childID = object.getString("connect");
+                        onBothPartiesConnect();
                     }
                     catch (JSONException e) {
                         e.printStackTrace();
@@ -73,3 +75,4 @@ public class ChildConnectionActivity extends AppCompatActivity {
         startActivity(intent);
     }
 }
+
