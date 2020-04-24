@@ -78,8 +78,13 @@ public class ConnectionActivity extends AppCompatActivity {
                 @Override
                 public void run() {
                     JSONObject object = (JSONObject) args[0];
-                    mSocket.emit("both connect", "connectionString");
-                    confirmChildScreen(); //Enable once child-side is completed
+                    try {
+                        String childID = object.getString("connect");
+                        confirmChildScreen(); //Enable once child-side is completed
+                    }
+                    catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                 }
             });
         }
@@ -98,4 +103,3 @@ public class ConnectionActivity extends AppCompatActivity {
         mSocket.off("Disconnect from Socket Server!");
     }
 }
-
