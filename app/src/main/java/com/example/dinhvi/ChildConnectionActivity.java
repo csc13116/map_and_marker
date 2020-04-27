@@ -35,7 +35,7 @@ public class ChildConnectionActivity extends AppCompatActivity {
         btnChildConnect = findViewById(R.id.btn_childConnect);
 
         try {
-            mSocket = IO.socket("https://socketio-temp.herokuapp.com/connect");
+            mSocket = IO.socket("https://dacnpm-backend.herokuapp.com/connect");
             mSocket.connect();
         } catch (URISyntaxException e) {
             e.printStackTrace();
