@@ -28,11 +28,6 @@ jobs:
             ./gradlew :app:assembleDebug
             # ./gradlew :app:assembleDebugAndroidTest
       - run:
-          name: "Show directory output" # for debbug builds
-          command: |
-            pwd
-            ls -laR .
-      - run:
           name: "Copy APK files" # for release
           command: |
             mkdir -p /tmp/artifacts
@@ -56,8 +51,6 @@ jobs:
       - run:
           name: "Publish Release on GitHub"
           command: |
-            pwd
-            ls -laR .
             VERSION=$(date +%Y%m%d_%H%M%S)
             ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete ${VERSION} /tmp/artifacts/
 workflows:
